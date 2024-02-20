@@ -1,11 +1,12 @@
 #!/usr/bin/env sh
-. "$(dirname -- "$0")/_/husky.sh"
+
+
+echo "Check if any dependencies have been updated"
 
 function changed {
-  	git diff --name-only HEAD@{1} HEAD | grep "^$1" > /dev/null 2>&1
+  git diff --name-only HEAD@{1} HEAD | grep "^$1" > /dev/null 2>&1
 }
 
 if changed 'package-lock.json'; then
-	npm ci
-  	echo "📦 package-lock.json changed. Running npm ci to bring your dependencies up to date."
+  echo "📦 package-lock.json changed. Run npm install to bring your dependencies up to date."
 fi
